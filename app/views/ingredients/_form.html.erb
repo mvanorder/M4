@@ -1,0 +1,27 @@
+<%= bootstrap_form_for @ingredient do |f| %>
+  <% if @ingredient.errors.any? %>
+    <div id="error_explination">
+      <h2>
+        <%= pluralize(@ingretient.errors.count, "error") %> prohibited this article form being saved:
+      </h2>
+      <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.text_field :name, label: "Ingredient name" %>
+  </p>
+
+  <p>
+    <%= f.text_area :description, label: "Description" %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
