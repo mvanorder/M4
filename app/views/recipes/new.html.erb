@@ -1,0 +1,32 @@
+<h1>New Recipe</h1>
+
+<%= bootstrap_form_for :recipe, url: recipes_path do |f| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explination">
+      <h2>
+        <%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:
+      </h2>
+      <ul>
+        <% @recipe.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.text_field :name, label: "Recipe Name" %>
+  </p>
+
+  <p>
+    <%= f.text_area :description, label: "Description" %>
+  </p>
+
+  <p>
+    <%= f.text_area :directions, label: "Directions" %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
