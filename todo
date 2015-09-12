@@ -1,1 +1,3 @@
-impliment rails-bootstrap gem
+impliment nested_form for reicpe-ingredients
+impliment user creation/login
+impliment recipe ownership
