@@ -1,0 +1,19 @@
+<%= bootstrap_form_for @recipe, :html => { :multipart => true } do |f| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explination">
+      <h2>
+        <%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:
+      </h2>
+      <ul>
+        <% @recipe.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= f.text_field :name, label: "Recipe Name" %>
+    <%= f.text_area :description, label: "Description" %>
+    <%= f.file_field :image, label: "Image" %>
+    <%= f.text_area :directions, label: "Directions" %>
+    <%= f.submit %>
+<% end %>
