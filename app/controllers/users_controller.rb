@@ -1,6 +1,21 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update]
   def show
     @user = User.find(params[:id])
+    if logged_in?
+      if @user[:id] == current_user[:id]
+        render 'edit'
+      end
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    if @user[:id] == current_user[:id]
+      @user = User.find(params[:id])
+    else
+      render 'show'
+    end
   end
 
   def new
@@ -19,8 +34,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(user_params)
+      #redirect_to @user
+      flash.now[:success] = "Successfully updated profile"
+      render 'edit'
+    else
+      flash.now[:danger] = "Failed to updated profile"
+      render 'edit'
+    end
+  end
+
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :username, :bio)
     end
+
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
 end
