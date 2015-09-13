@@ -1,5 +1,5 @@
 /* adjust body when menu is open */
-body.slide-active {
+body.slide-active, #slide-nav div {
     overflow-x: hidden
 }
 /*first child of #page-content so it doesn't shift around*/

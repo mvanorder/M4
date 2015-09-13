@@ -27,7 +27,8 @@ $(document).ready(function () {
         });
 
         $(pagewrapper).stop().animate({
-            left: selected ? '0px' : slidewidth
+            // dissabled as sliding over creates overflow that causes unwanted ability to scroll horizontally on mobile devices
+            //left: selected ? '0px' : slidewidth
         });
 
         $(navigationwrapper).stop().animate({
