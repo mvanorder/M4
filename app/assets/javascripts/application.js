@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-tablesorter
 //= require bootstrap
+//= require_tree .
 //
 // turbolinks is breaking tablesorter on any load after the first
 // require turbolinks
