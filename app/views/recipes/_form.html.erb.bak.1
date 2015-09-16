@@ -14,20 +14,12 @@
     <%= f.text_field :name, label: "Recipe Name" %>
     <%= f.text_area :description, label: "Description" %>
     <%= f.file_field :image, label: "Image" %>
-    <% #= f.fields_for :ingredients %>
-    <table id="ingredients" style="border: 1px solid black; width: 100%">
-      <%= f.fields_for :recipe_ingredients, :wrapper => false do |ingredient_form| %>
-        <tr class="fields">
-          <% debug ingredient_form %>
-          <%= ingredient_form.fields_for :ingredient do |ingredient| %>
-            <td><%= ingredient.text_field :name, label: "ingredient" %></td>
-          <% end %>
-          <td><%= ingredient_form.link_to_remove "Remove" %></td>
-
-        </tr>
-      <% end %>
-    </table>
-    <p><%= f.link_to_add_hmt "Add ingredient", :ingredients, :recipes, :data => { :target => "#ingredients" } %></p>
+    <%= f.fields_for :ingredients %>
+    <%= f.fields_for :ingredients do |ingredient_form| %>
+      <%= ingredient_form.text_field :name, label: "ingredient" %>
+      <%= ingredient_form.link_to_remove "Remove" %>
+    <% end %>
+    <p><%= f.link_to_add "Add ingredient", :ingredients %></p>
     <br />
     <%= f.text_area :directions, label: "Directions" %>
     <%= f.submit %>

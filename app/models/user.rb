@@ -14,4 +14,5 @@ class User < ActiveRecord::Base
   validates :password, presence: true,
                        length: { minimum: 8 },
                        allow_nil: true
+  has_many :recipes
 end

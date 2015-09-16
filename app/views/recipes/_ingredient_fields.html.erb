@@ -1,0 +1,9 @@
+<table id="ingredients">
+  <%= f.fields_for :ingredients, :wrapper => false do |ingredient_form| %>
+    <%= debug :ingredients %>
+    <tr class="fields">
+      <td><%= ingredient_form.text_field :name, label: "ingredient" %></td>
+      <td><%= ingredient_form.link_to_remove "Remove" %></td>
+    </tr>
+  <% end %>
+</table>

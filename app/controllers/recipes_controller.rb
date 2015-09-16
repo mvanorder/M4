@@ -4,10 +4,14 @@ class RecipesController < ApplicationController
   end
 
   def show
+    #@user = current_user
+    #@recipe = @user.recipe.find(params[:id])
     @recipe = Recipe.find(params[:id])
   end
 
   def new
+    @user = current_user
+    #@recipe = @user.recipe.build
     @recipe = Recipe.new
   end
 
@@ -16,7 +20,9 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @user = current_user
+    @recipe = @user.recipes.build(recipe_params)
+    #@recipe = Recipe.new(recipe_params)
 
     if @recipe.save
       redirect_to @recipe
@@ -26,6 +32,7 @@ class RecipesController < ApplicationController
   end
 
   def update
+    binding.pry
     @recipe = Recipe.find(params[:id])
 
     if @recipe.update(recipe_params)
@@ -44,6 +51,8 @@ class RecipesController < ApplicationController
 
   private
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :directions, :image)
+      params.require(:recipe).permit(:name, :description, :directions, :image,
+                                     recipe_ingredients_attributes: [:id, :ingredients_id, :recipe_id, :_destroy],
+                                     ingredients_attributes: [:id, :name, :_destroy])
     end
 end

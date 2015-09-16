@@ -18,7 +18,6 @@
     <table id="ingredients" style="border: 1px solid black; width: 100%">
       <%= f.fields_for :recipe_ingredients, :wrapper => false do |ingredient_form| %>
         <tr class="fields">
-          <% debug ingredient_form %>
           <%= ingredient_form.fields_for :ingredient do |ingredient| %>
             <td><%= ingredient.text_field :name, label: "ingredient" %></td>
           <% end %>
@@ -27,7 +26,7 @@
         </tr>
       <% end %>
     </table>
-    <p><%= f.link_to_add_hmt "Add ingredient", :ingredients, :recipes, :data => { :target => "#ingredients" } %></p>
+    <p><%= f.link_to_add_hmt "Add ingredient", :ingredients, :recipe_ingredients, :data => { :target => "#ingredients" } %></p>
     <br />
     <%= f.text_area :directions, label: "Directions" %>
     <%= f.submit %>

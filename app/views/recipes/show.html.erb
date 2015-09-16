@@ -1,6 +1,7 @@
 <p>
   <strong>Name:</strong>
-  <%= @recipe.name %>
+  <%= @recipe.name %><br />
+  <%= link_to @recipe.user[:username], user_path(@recipe.user) %>
 </p>
 <p>
   <strong>Description:</strong>
@@ -14,7 +15,14 @@
         No Image
     <% end %>
   </p>
-<p>
+  
+  <p>
+    <strong>Ingredients</strong>
+    <% @recipe.ingredients.each do |ingreient| %>
+      <p><%= ingreient.name %></p>
+    <% end %>
+  </p>
+  <p>
   <strong>Directions:</strong>
   <%= @recipe.directions %>
 </p>
