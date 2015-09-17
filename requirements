@@ -2,3 +2,5 @@ sqlite3
 Ruby 2.1.0+
 Rails 4
 ImageMagick
+
+link_to_add_hmt from https://github.com/ryanb/nested_form/blob/master/lib/nested_form/builder_mixin.rb

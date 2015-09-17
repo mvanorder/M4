@@ -15,7 +15,7 @@
     <%= f.text_area :description, label: "Description" %>
     <%= f.file_field :image, label: "Image" %>
     <% #= f.fields_for :ingredients %>
-    <table id="ingredients" style="border: 1px solid black; width: 100%">
+    <table id="ingredients" style="width: 100%">
       <%= f.fields_for :recipe_ingredients, :wrapper => false do |ingredient_form| %>
         <tr class="fields">
           <% debug ingredient_form %>
@@ -27,7 +27,7 @@
         </tr>
       <% end %>
     </table>
-    <p><%= f.link_to_add_hmt "Add ingredient", :ingredients, :recipes, :data => { :target => "#ingredients" } %></p>
+    <p><%= f.link_to_add_hmt "Add ingredient", :ingredient, :recipe_ingredients, :data => { :target => "#ingredients" } %></p>
     <br />
     <%= f.text_area :directions, label: "Directions" %>
     <%= f.submit %>

@@ -4,14 +4,11 @@ class RecipesController < ApplicationController
   end
 
   def show
-    #@user = current_user
-    #@recipe = @user.recipe.find(params[:id])
     @recipe = Recipe.find(params[:id])
   end
 
   def new
     @user = current_user
-    #@recipe = @user.recipe.build
     @recipe = Recipe.new
   end
 
@@ -20,10 +17,19 @@ class RecipesController < ApplicationController
   end
 
   def create
+    binding.pry
     @user = current_user
-    @recipe = @user.recipes.build(recipe_params)
     #@recipe = Recipe.new(recipe_params)
+    params[:recipe][:recipe_ingredients_attributes].each do |riid, rivalue|
+      if Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take
+        params[:recipe][:recipe_ingredients_attributes][riid][:ingredient_id] = Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take.id.to_s
+        params[:recipe][:recipe_ingredients_attributes][riid].delete("ingredient_attributes")
+      end
+    end
+    
+    @recipe = @user.recipes.build(recipe_params)
 
+    binding.pry
     if @recipe.save
       redirect_to @recipe
     else
@@ -32,8 +38,15 @@ class RecipesController < ApplicationController
   end
 
   def update
-    binding.pry
     @recipe = Recipe.find(params[:id])
+    params[:recipe][:recipe_ingredients_attributes].each do |riid, rivalue|
+      if !rivalue[:ingredient_attributes][:id]
+        if Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take
+          params[:recipe][:recipe_ingredients_attributes][riid][:ingredient_id] = Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take.id.to_s
+          params[:recipe][:recipe_ingredients_attributes][riid].delete("ingredient_attributes")
+        end
+      end
+    end
 
     if @recipe.update(recipe_params)
       redirect_to @recipe
@@ -52,7 +65,7 @@ class RecipesController < ApplicationController
   private
     def recipe_params
       params.require(:recipe).permit(:name, :description, :directions, :image,
-                                     recipe_ingredients_attributes: [:id, :ingredients_id, :recipe_id, :_destroy],
-                                     ingredients_attributes: [:id, :name, :_destroy])
+                                     recipe_ingredients_attributes: [:id, :ingredient_id, :_destroy,
+                                                                     ingredient_attributes: [:id, :name]])
     end
 end
