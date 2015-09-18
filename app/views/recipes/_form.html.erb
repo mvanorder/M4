@@ -14,11 +14,9 @@
     <%= f.text_field :name, label: "Recipe Name" %>
     <%= f.text_area :description, label: "Description" %>
     <%= f.file_field :image, label: "Image" %>
-    <% #= f.fields_for :ingredients %>
     <table id="ingredients" style="width: 100%">
       <%= f.fields_for :recipe_ingredients, :wrapper => false do |ingredient_form| %>
         <tr class="fields">
-          <% debug ingredient_form %>
           <%= ingredient_form.fields_for :ingredient do |ingredient| %>
             <td><%= ingredient.text_field :name, label: "ingredient" %></td>
           <% end %>

@@ -17,7 +17,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    binding.pry
     @user = current_user
     #@recipe = Recipe.new(recipe_params)
     params[:recipe][:recipe_ingredients_attributes].each do |riid, rivalue|
@@ -29,7 +28,6 @@ class RecipesController < ApplicationController
     
     @recipe = @user.recipes.build(recipe_params)
 
-    binding.pry
     if @recipe.save
       redirect_to @recipe
     else

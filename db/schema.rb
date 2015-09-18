@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914010045) do
+ActiveRecord::Schema.define(version: 20150917143206) do
+
+  create_table "auth_groups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "auth_groups", ["name"], name: "index_auth_groups_on_name"
+
+  create_table "auth_memberships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "auth_group_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "ingredients", force: :cascade do |t|
     t.datetime "created_at",  null: false

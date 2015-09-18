@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
+    binding.pry
     if @user.update_attributes(user_params)
       #redirect_to @user
       flash.now[:success] = "Successfully updated profile"
@@ -49,7 +49,8 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :username, :bio)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :username, :bio,
+                                   auth_memberships_attributes: [:id, :auth_group_id, :_destroy])
     end
 
     def logged_in_user
