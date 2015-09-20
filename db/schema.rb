@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917143206) do
+ActiveRecord::Schema.define(version: 20150920013537) do
 
   create_table "auth_groups", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(version: 20150917143206) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "auth_memberships", ["auth_group_id"], name: "index_auth_memberships_on_auth_group_id"
+  add_index "auth_memberships", ["user_id", "auth_group_id"], name: "index_auth_memberships_on_user_id_and_auth_group_id", unique: true
+  add_index "auth_memberships", ["user_id"], name: "index_auth_memberships_on_user_id"
 
   create_table "ingredients", force: :cascade do |t|
     t.datetime "created_at",  null: false

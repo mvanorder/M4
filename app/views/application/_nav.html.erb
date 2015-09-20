@@ -53,6 +53,10 @@
               <li><%= link_to "New", new_ingredient_path %></li>
             </ul>
           </li>
+
+          <% #= current_user.includes(:auth_groups).inspect %>
+          <% #= User.find(current_user[:id]).where(:auth_memberships => {:name => "Administrator"}) %>
+          <%= User.find(current_user[:id]).auth_groups.methods %>
           <%= render 'adminnav' %>
         </ul>
       </div><!-- /.navbar-collapse -->
