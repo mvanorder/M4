@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
                     length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  
+  validates :user, presence: true,
+                   length: { maximum: 42 },
+                   uniqueness: { case_sensitive: false }
   
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" } 
   #has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"

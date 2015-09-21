@@ -60,17 +60,4 @@ class UsersController < ApplicationController
                                    auth_memberships_attributes: [:id, :auth_group_id, :_destroy])
     end
 
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
-
-    def admin_user
-      unless is_admin?
-        flash[:danger] = "You are not an administrator"
-        redirect_to root_path
-      end
-    end
 end

@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :logged_in_user, only: [:new, :edit, :create, :update, :destroy]
+  
   def index
     if params[:format]
       @recipes = User.find(params[:format]).recipes

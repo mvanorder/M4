@@ -27,7 +27,7 @@
   <% @recipes.each do |recipe| %>
     <tr>
       <td>
-        <% if recipe.user_id == current_user.id || is_admin? %>
+        <% if logged_in? && (recipe.user_id == current_user.id || is_admin?) %>
           <%= link_to(raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_recipe_path(recipe)) %>
           <%= link_to(raw("<span class=\"glyphicon glyphicon-remove\"></span>"), recipe_path(recipe),
                                 method: :delete,
