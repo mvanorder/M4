@@ -1,0 +1,43 @@
+<h1>Users</h1>
+ 
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Auth Groups</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Auth Groups</th>
+    </tr>
+  </tfoot>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      <td><%= link_to 'Remove', user_path(user),
+                                method: :delete,
+                                data: {confirm: 'Are you sure you want to delete?' } %></td>
+      <td><%= link_to (user.name || ""), user_path(user) %></td>
+      <td><%= link_to (user.username || ""), user_path(user) %></td>
+      <td><%= link_to (user.email || ""), user_path(user) %></td>
+      <td>
+        <% user.auth_groups.each do |auth_group| %>
+          <%= auth_group[:name] %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= render 'tablesorter' %>

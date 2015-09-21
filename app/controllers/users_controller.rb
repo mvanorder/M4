@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :admin_user, only: [:index, :destroy]
+
+  def index
+    @users = User.all
+  end
+
   def show
     @user = User.find(params[:id])
-=begin
-    if logged_in?
-      if @user[:id] == current_user[:id]
-        render 'edit'
-      end
-    end
-=end
   end
 
   def edit
@@ -48,6 +47,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    redirect_to admin_users_path
+  end
+  
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :username, :bio,
@@ -61,4 +67,10 @@ class UsersController < ApplicationController
       end
     end
 
+    def admin_user
+      unless is_admin?
+        flash[:danger] = "You are not an administrator"
+        redirect_to root_path
+      end
+    end
 end
