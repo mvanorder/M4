@@ -1,6 +1,10 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
+    if params[:format]
+      @recipes = User.find(params[:format]).recipes
+    else
+      @recipes = Recipe.all
+    end
   end
 
   def show
@@ -19,10 +23,12 @@ class RecipesController < ApplicationController
   def create
     @user = current_user
     #@recipe = Recipe.new(recipe_params)
-    params[:recipe][:recipe_ingredients_attributes].each do |riid, rivalue|
-      if Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take
-        params[:recipe][:recipe_ingredients_attributes][riid][:ingredient_id] = Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take.id.to_s
-        params[:recipe][:recipe_ingredients_attributes][riid].delete("ingredient_attributes")
+    if !params[:recipe][:recipe_ingredients_attributes].nil?
+      params[:recipe][:recipe_ingredients_attributes].each do |riid, rivalue|
+        if Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take
+          params[:recipe][:recipe_ingredients_attributes][riid][:ingredient_id] = Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take.id.to_s
+          params[:recipe][:recipe_ingredients_attributes][riid].delete("ingredient_attributes")
+        end
       end
     end
     

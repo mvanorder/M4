@@ -1,12 +1,15 @@
 <h1>Listing recipes</h1>
 
-<%= link_to 'New recipe', new_recipe_path %>
- 
+<div class="btn-group" role="group" aria-label="...">
+  <%= link_to 'Create new recipe', new_recipe_path, :class => "btn btn-default" %>
+  <%= link_to 'My recipes', recipes_path(current_user), :class => "btn btn-default" %>
+</div>
+<br /> 
+<br /> 
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
+      <th class="sorter-false"></th>
       <th>Name</th>
       <th>Description</th>
       <th>Owner</th>
@@ -14,7 +17,6 @@
   </thead>
   <tfoot>
     <tr>
-      <th></th>
       <th></th>
       <th>Name</th>
       <th>Description</th>
@@ -24,10 +26,14 @@
   <tbody>
   <% @recipes.each do |recipe| %>
     <tr>
-      <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-      <td><%= link_to 'Remove', recipe_path(recipe),
+      <td>
+        <% if recipe.user_id == current_user.id || is_admin? %>
+          <%= link_to(raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_recipe_path(recipe)) %>
+          <%= link_to(raw("<span class=\"glyphicon glyphicon-remove\"></span>"), recipe_path(recipe),
                                 method: :delete,
-                                data: {confirm: 'Are you sure you want to delete?' } %></td>
+                                data: {confirm: 'Are you sure you want to delete?' }) %>
+        <% end %>                       
+      </td>
       <td><%= recipe.name %></td>
       <td><%= recipe.directions %></td>
       <td><%= recipe.user[:username] if recipe.user %></td>

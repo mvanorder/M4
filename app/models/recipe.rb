@@ -1,14 +1,9 @@
 class Recipe < ActiveRecord::Base
-#  attr_accessible :name,
-#                  :description,
-#                  :directions,
-#                  :recipe_ingredients_attributes
-
   validates :name, presence: true,
                    length: { minimum: 5 }
 
   
-  as_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ },
                                size: { less_than: 3.megabytes }
 

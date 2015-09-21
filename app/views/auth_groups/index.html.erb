@@ -1,20 +1,18 @@
 <h1>Groups</h1>
 
-<%= link_to 'Create auth group', new_auth_group_path %>
+<%= link_to 'Create auth group', new_auth_group_path, :class => "btn btn-default" %>
 
 
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
+      <th class="sorter-false"></th>
       <th>Name</th>
       <th>Description</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
-      <th></th>
       <th></th>
       <th>Name</th>
       <th>Description</th>
@@ -23,10 +21,12 @@
   <tbody>
   <% @auth_groups.each do |auth_group| %>
     <tr>
-      <td><%= link_to 'Edit', edit_auth_group_path(auth_group) %></td>
-      <td><%= link_to 'Remove', auth_group_path(auth_group),
+      <td>
+        <%= link_to(raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_auth_group_path(auth_group)) %>
+        <%= link_to(raw("<span class=\"glyphicon glyphicon-remove\"></span>"), auth_group_path(auth_group),
                                 method: :delete,
-                                data: {confirm: 'Are you sure you want to delete?' } %></td>
+                                data: {confirm: 'Are you sure you want to delete?' }) %>
+      </td>
       <td><%= auth_group.name %></td>
       <td><%= auth_group.description %></td>
     </tr>
