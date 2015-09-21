@@ -17,12 +17,12 @@ module SessionsHelper
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-  def current_users_auth_groups
-#   @current_users_auth_groups = User.find_by(id: session[:user_id])
-  end
-
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
     !current_user.nil?
+  end
+
+  def is_admin?
+    !current_user.auth_groups.where(name: "Administrator").empty?
   end
 end

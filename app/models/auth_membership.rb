@@ -1,4 +1,4 @@
 class AuthMembership < ActiveRecord::Base
-  belongs_to :users
-  belongs_to :auth_groups
+  belongs_to :user
+  belongs_to :auth_group
 end

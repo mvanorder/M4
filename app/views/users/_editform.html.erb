@@ -1,0 +1,43 @@
+<%= bootstrap_form_for @user, url: user_path(@user), method: "patch", :html => { :multipart => true } do |f| %>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <h1>Update Profile</h1>
+    <% if @user.errors.any? %>
+      <div id="error_explination">
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> prohibited this recipe from being saved:
+      </h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-1 col-md-push-4">
+        <%= f.submit 'Update Profile' %>
+        <h2><%= f.text_field :username, label: "Username" %></h2>
+        <%= f.text_field :name, label: "Name" %><br />
+        <%= f.text_field :email, label: "Email" %><br /><br />
+        <%= f.password_field :password, label: "Password" %>
+        <%= f.password_field :password_confirmation, label: "Confirm Password" %>
+      </div>
+      <div class="col-md-4 col-md-pull-7">
+      <% if @user.image? %>
+        <%= image_tag @user.image.url :medium %>
+      <% else %>
+        <%= image_tag "PICA-300x300.jpg", size: "300x300" %>
+      <% end %>
+        <br />
+        <%= f.file_field :image, label: "Image" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <%= f.text_area :bio, label: "Bio", rows: "10" %>
+  </div>
+</div>
+<% end %>
