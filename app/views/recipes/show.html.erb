@@ -1,28 +1,36 @@
-<p>
-  <strong>Name:</strong>
-  <%= @recipe.name %><br />
-  <%= link_to @recipe.user[:username], user_path(@recipe.user) %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @recipe.description %>
-  </p>
-  <p>
-    <strong>Image:</strong>
+<div class="row">
+  <div class="col-md-4">
+    <h2><%= @recipe.name %></h2>
+    <%= link_to @recipe.user[:username], user_path(@recipe.user) if @recipe.user %>
+    <%= @recipe.description %>
+    <div class="row">
+      <div class="col-md-4">
+        Prep time
+      </div>
+      <div class="col-md-4">
+        Cook time
+      </div>
+      <div class="col-md-4">
+        Servings
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
     <% if @recipe.image? %>
       <%= image_tag @recipe.image.url :medium %>
     <% else %>
-        No Image
+      <%= image_tag "covers-1413241" %>
     <% end %>
-  </p>
-  
+  </div>
+</div>
+
   <p>
-    <strong>Ingredients</strong>
+  <h2>Ingredients</h2>
     <% @recipe.ingredients.each do |ingreient| %>
       <p><%= ingreient.name %></p>
     <% end %>
   </p>
   <p>
-  <strong>Directions:</strong>
+  <h2>Directions</h2>
   <%= @recipe.directions %>
 </p>

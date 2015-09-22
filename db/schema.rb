@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920013537) do
+ActiveRecord::Schema.define(version: 20150921231951) do
 
   create_table "auth_groups", force: :cascade do |t|
     t.string   "name"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 20150920013537) do
     t.datetime "image_updated_at"
     t.string   "username"
     t.text     "bio"
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

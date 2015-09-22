@@ -21,6 +21,10 @@
   <div class="col-md-10 col-md-offset-1">
         <br /><br />
     <strong>Bio:</strong><br />
-    <%= @user.bio %>
+    <% if !@user.bio.empty? %>
+      <%= @user.bio  %>
+    <% else %>
+      <%= "This user hasn't added any information yet" %>
+    <% end %>
   </div>
 </div>

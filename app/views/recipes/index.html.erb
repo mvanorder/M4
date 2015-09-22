@@ -34,9 +34,9 @@
                                 data: {confirm: 'Are you sure you want to delete?' }) %>
         <% end %>                       
       </td>
-      <td><%= recipe.name %></td>
-      <td><%= recipe.directions %></td>
-      <td><%= recipe.user[:username] if recipe.user %></td>
+      <td><%= link_to (recipe.name || ""), recipe_path(recipe) %></td>
+      <td><%= link_to (recipe.directions || ""), recipe_path(recipe) %></td>
+      <td><%= link_to (recipe.user[:username]), recipe_path(recipe) if recipe.user %></td>
     </tr>
   <% end %>
   </tbody>
