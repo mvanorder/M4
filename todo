@@ -1,3 +1,2 @@
-impliment nested_form for reicpe-ingredients
-impliment user creation/login
-impliment recipe ownership
+cleanup db/migrations
+create starter data for db in a script

@@ -42,6 +42,18 @@
     <table id="ingredients" style="width: 100%">
       <%= f.fields_for :recipe_ingredients, :wrapper => false do |ingredient_form| %>
         <tr class="fields">
+          <td>
+            <div class="input-group form-group">
+              <%= ingredient_form.text_field :quantity_multiplier, hide_label: true, class: "form-control imput-lg" %>
+            </div>
+          </td>
+          <% #= ingredient_form.fields_for :quantity do |quantity| %>
+            <td>
+              <div class="input-group form-group">
+                <%= ingredient_form.collection_select(:quantity_id, Quantity.all, :id, :name, { hide_label: true }, { :multiple => false } ) %>
+              </div>
+            </td>
+          <% #end %>
           <%= ingredient_form.fields_for :ingredient do |ingredient| %>
             <td>
               <div class="input-group form-group">

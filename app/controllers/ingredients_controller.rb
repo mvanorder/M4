@@ -29,7 +29,7 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.find(params[:id])
 
     if @ingredient.update(ingredient_params)
-      redirect_to @ingredient
+      redirect_to admin_ingredients_path
     else
       render 'edit'
     end

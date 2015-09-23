@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'admin/users' => 'users#index'
   get 'admin/authgroups' => 'auth_groups#index'
+  get 'admin/ingredients/' => 'ingredients#index'
   get 'admin/quantities' => 'quantities#index'
   get 'admin/quantities/new' => 'quantities#new'
   
