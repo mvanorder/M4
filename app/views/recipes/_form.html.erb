@@ -44,8 +44,9 @@
         <tr class="fields">
           <%= ingredient_form.fields_for :ingredient do |ingredient| %>
             <td>
-              <div class="input-group">
-                <%= ingredient.text_field :name, placeholder: "ingredient", hide_label: true %>
+              <div class="input-group form-group">
+                <% #= ingredient.text_field :name, placeholder: "ingredient", hide_label: true %>
+                <%= ingredient.autocomplete_field :name, autocomplete_ingredient_name_recipes_path, placeholder: "ingredient", class: "form-control imput-lg" %>
                 <span class="input-group-btn">
                   <%= ingredient_form.link_to_remove(raw("<span class=\"glyphicon glyphicon-remove\"></span>"), class: "btn btn-default") %>
                 </span>

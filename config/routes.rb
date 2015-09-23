@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :recipes, :ingredients, :users, :auth_memberships, :auth_groups
+  resources :ingredients, :users, :auth_memberships, :auth_groups
+  resources :recipes do
+    get :autocomplete_ingredient_name, on: :collection
+  end
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
