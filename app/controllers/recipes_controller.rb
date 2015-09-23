@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
 
   def create
     @user = current_user
-    #@recipe = Recipe.new(recipe_params)
+
     if !params[:recipe][:recipe_ingredients_attributes].nil?
       params[:recipe][:recipe_ingredients_attributes].each do |riid, rivalue|
         if Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take
@@ -33,7 +33,7 @@ class RecipesController < ApplicationController
         end
       end
     end
-    
+
     @recipe = @user.recipes.build(recipe_params)
 
     if @recipe.save
@@ -72,6 +72,7 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:name, :description, :directions, :image,
                                      recipe_ingredients_attributes: [:id, :ingredient_id, :_destroy,
-                                                                     ingredient_attributes: [:id, :name]])
+                                                                     ingredient_attributes: [:id, :ingredient_name, :name],
+                                                                     ingredient: [:id, :ingredient_name]])
     end
 end

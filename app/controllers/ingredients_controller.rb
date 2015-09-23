@@ -35,6 +35,22 @@ class IngredientsController < ApplicationController
     end
   end
 
+  def destroy
+    @ingredient = Ingredient.find(params[:id])
+    if @ingredient.recipes.empty?
+      @ingredient.destroy
+    else
+      error_msg = "Cannot delete #{@ingredient.name} as it is in use by the following recipes: \n"
+      @ingredient.recipes.each do |recipe|
+        error_msg << "<br />"
+        error_msg << recipe.name
+      end
+      flash[:danger] = error_msg
+#      flash[:danger] = "#{@ingredient.name} is in use by #{@ingredient.recipes}" 
+    end
+    redirect_to ingredients_path
+  end
+
   private
     def ingredient_params
       params.require(:ingredient).permit(:name, :description)

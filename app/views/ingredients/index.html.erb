@@ -3,24 +3,29 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>Description</th>
-      <th></th>
     </tr>
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>Description</th>
-      <th></th>
     </tr>
   </tfoot>
   <tbody>
   <% @ingredients.each do |ingredient| %>
     <tr>
+      <td>
+        <%= link_to(raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_ingredient_path(ingredient)) %>
+        <%= link_to(raw("<span class=\"glyphicon glyphicon-remove\"></span>"), ingredient_path(ingredient),
+                              method: :delete,
+                              data: {confirm: 'Are you sure you want to delete?' }) %>
+      </td>
       <td><%= ingredient.name %></td>
       <td><%= ingredient.description %></td>
-      <td><%= link_to 'Edit', edit_ingredient_path(ingredient) %></td>
     </tr>
   <% end %>
   </tbody>
