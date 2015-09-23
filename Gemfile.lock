@@ -76,6 +76,9 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-tablesorter (1.18.3)
       railties (>= 3.2, < 5)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
@@ -182,6 +185,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-tablesorter
+  jquery-turbolinks
   jquery-ui-rails
   nested_form
   paperclip

@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
 //= require autocomplete-rails
@@ -18,6 +19,4 @@
 //= require bootstrap
 //= require jquery_nested_form
 //= require_tree .
-//
-// turbolinks is breaking tablesorter on any load after the first
 //= require turbolinks
