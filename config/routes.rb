@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'quantities/index'
+
   get 'sessions/new'
 
   get 'users/new'
@@ -12,13 +14,16 @@ Rails.application.routes.draw do
 
   get 'admin/users' => 'users#index'
   get 'admin/authgroups' => 'auth_groups#index'
+  get 'admin/quantities' => 'quantities#index'
+  get 'admin/quantities/new' => 'quantities#new'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :ingredients, :users, :auth_memberships, :auth_groups
+  resources :ingredients, :users, :auth_memberships, :auth_groups, :quantities
   resources :recipes do
     get :autocomplete_ingredient_name, on: :collection
+    get :autocomplete_quantity_name, on: :collection
   end
 
   # You can have the root of your site routed with "root"

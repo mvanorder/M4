@@ -1,0 +1,53 @@
+<h1>Quantities</h1>
+
+<%= link_to 'New Quantity', admin_quantities_new_path, :class => "btn btn-default" %>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Abrv</th>
+      <th>Type</th>
+      <th>Multiplier</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Abrv</th>
+      <th>Type</th>
+      <th>Multiplier</th>
+    </tr>
+  </tfoot>
+  <tbody>
+  <% @quantities.each do |quantity| %>
+    <tr>
+      <td>
+        <%= link_to(raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_quantity_path(quantity)) %>
+        <%= link_to(raw("<span class=\"glyphicon glyphicon-remove\"></span>"), quantity_path(quantity),
+                              method: :delete,
+                              data: {confirm: 'Are you sure you want to delete?' }) %>
+      </td>
+      <td><%= quantity.name %></td>
+      <td><%= quantity.abbreviation %></td>
+      <td>
+        <% case quantity.quantity_type %>
+        <% when 0 %>
+          <%= "Count" %>
+        <% when 1 %>
+          <%= "Weight" %>
+        <% when 2 %>
+          <%= "Volume" %>
+        <% else %>
+          <%= quantity.quantity_type %>
+        <% end%>
+      </td>
+      <td><%= quantity.multiplier %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= render 'tablesorter' %>
+

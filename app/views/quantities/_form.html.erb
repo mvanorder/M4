@@ -1,0 +1,19 @@
+<%= bootstrap_form_for @quantity do |f| %>
+  <% if @quantity.errors.any? %>
+    <div id="error_explination">
+      <h2>
+        <%= pluralize(@quantity.errors.count, "error") %> prohibited this article form being saved:
+      </h2>
+      <ul>
+        <% @quantity.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.text_field :name, placeholder: "Quantity name", hide_label: true %>
+  <%= f.text_field :abbreviation, placeholder: "Abbreviation", hide_label: true %>
+  <%= f.select :quantity_type, [["Count", 0], ["Weight", 1], ["Volume", 2]], hide_label: true %>
+  <%= f.text_field :multiplier, placeholder: "multiplier", hide_label: true %>
+  <%= f.submit %>
+<% end %>

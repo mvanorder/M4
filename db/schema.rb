@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921231951) do
+ActiveRecord::Schema.define(version: 20150923081814) do
 
   create_table "auth_groups", force: :cascade do |t|
     t.string   "name"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20150921231951) do
     t.string   "name"
     t.text     "description"
   end
+
+  create_table "quantities", force: :cascade do |t|
+    t.string   "name"
+    t.float    "multiplier"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "quantity_type"
+    t.string   "abbreviation"
+  end
+
+  add_index "quantities", ["name"], name: "index_quantities_on_name"
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer  "recipe_id"
