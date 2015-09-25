@@ -46,8 +46,26 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
+
+    # clean up empty entries
+    recipe_params[:recipe_ingredients_attributes].each do |k, v|
+      if v[:quantity_multiplier].empty? && v[:ingredient_attributes][:name].empty?
+        params[:recipe][:recipe_ingredients_attributes].delete(k)
+      end
+    end
+
+    # prevent duplicate ingredients
     params[:recipe][:recipe_ingredients_attributes].each do |riid, rivalue|
+      # If ingredient is new to the recipe
       if !rivalue[:ingredient_attributes][:id]
+        # If ingredient is already in he database
+        if Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take
+          # Create a params entry for the ingredient_id and remove the create entry
+          params[:recipe][:recipe_ingredients_attributes][riid][:ingredient_id] = Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take.id.to_s
+          params[:recipe][:recipe_ingredients_attributes][riid].delete("ingredient_attributes")
+        end
+      else
+        #if ingredient was already in the recipe, make sure that the id references the correct ingredient_id
         if Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take
           params[:recipe][:recipe_ingredients_attributes][riid][:ingredient_id] = Ingredient.where(name: rivalue[:ingredient_attributes][:name]).take.id.to_s
           params[:recipe][:recipe_ingredients_attributes][riid].delete("ingredient_attributes")
