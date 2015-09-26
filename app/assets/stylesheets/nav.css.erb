@@ -1,0 +1,52 @@
+<% environment.context_class.instance_eval { include ApplicationHelper } %>
+
+.dropdown-toggle .caret {
+  display: none;
+}
+.navbar-shema {
+  background-color: <%= color_scheme("minustwo") %>;
+  border-color: <%= color_scheme("minusone") %>;
+}
+.navbar-shema .navbar-brand {
+  color: #9d9d9d;
+}
+.navbar-shema .navbar-brand:hover, .navbar-shema .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-shema .navbar-text {
+  color: <%= color_scheme("plustwo") %>;
+}
+.navbar-shema .navbar-nav > li > a {
+  color: <%= color_scheme("plustwo") %>;
+}
+.navbar-shema .navbar-nav > li > a:hover, .navbar-shema .navbar-nav > li > a:focus {
+  color: <%= color_scheme("plustwo") %>;
+  background-color: transparent;
+  background-color: <%= color_scheme("plustwo") %>;
+}
+.navbar-shema .navbar-nav > .active > a, .navbar-shema .navbar-nav > .active > a:hover, .navbar-shema .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #090909;
+}
+.navbar-shema .navbar-nav > .disabled > a, .navbar-shema .navbar-nav > .disabled > a:hover, .navbar-shema .navbar-nav > .disabled > a:focus {
+  color: #444;
+  background-color: transparent;
+}
+.navbar-shema .navbar-toggle {
+  border-color: #333;
+}
+.navbar-shema .navbar-toggle:hover, .navbar-shema .navbar-toggle:focus {
+  background-color: #333;
+}
+.navbar-shema .navbar-toggle .icon-bar {
+  background-color: <%= color_scheme("plustwo") %>
+}
+.navbar-shema .navbar-collapse,
+.navbar-shema .navbar-form {
+  border-color: #101010;
+}
+.navbar-shema .navbar-nav > .open > a, .navbar-shema .navbar-nav > .open > a:hover, .navbar-shema .navbar-nav > .open > a:focus {
+  background-color: #090909;
+  color: #fff;
+}

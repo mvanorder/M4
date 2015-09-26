@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923174353) do
+ActiveRecord::Schema.define(version: 20150925021103) do
 
   create_table "auth_groups", force: :cascade do |t|
     t.string   "name"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150923174353) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "quantity_id"
-    t.integer  "quantity_multiplier"
+    t.float    "quantity_multiplier"
   end
 
   create_table "recipes", force: :cascade do |t|

@@ -26,16 +26,19 @@
 
   <p>
   <h2>Ingredients</h2>
+  <% #= binding.pry %>
     <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
       <p>
         <% #= "#{recipe_ingredients.quantity_multiplier} #{recipe_ingredients.quantity.abbreviation} #{recipe_ingredients.ingreient.name}" %>
-        <% #binding.pry %>
+        <% quantity_i = recipe_ingredient.quantity_multiplier.to_i %>
+        <% quantity_frac = (recipe_ingredient.quantity_multiplier - quantity_i).to_r %>
         <% if Quantity.find(recipe_ingredient.quantity_id).quantity_type == 0 %>
-          <%= recipe_ingredient.quantity_multiplier %>
+          <%= "#{quantity_i if quantity_i > 0} #{quantity_frac}" %>
           <%= Quantity.find(recipe_ingredient.quantity_id).abbreviation unless Quantity.find(recipe_ingredient.quantity_id).name == "Count" %>
           <%= pluralize_no_digits((recipe_ingredient.quantity_multiplier * Quantity.find(recipe_ingredient.quantity_id).multiplier), Ingredient.find(recipe_ingredient.ingredient_id).name) %>
         <% else %>
-          <%= pluralize recipe_ingredient.quantity_multiplier, Quantity.find(recipe_ingredient.quantity_id).abbreviation %>
+          <%= "#{quantity_i if quantity_i > 0} #{quantity_frac}" %>
+          <%= pluralize_no_digits recipe_ingredient.quantity_multiplier, Quantity.find(recipe_ingredient.quantity_id).abbreviation %>
           <%= Ingredient.find(recipe_ingredient.ingredient_id).name %>
         <% end %>
       </p>

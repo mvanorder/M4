@@ -13,15 +13,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
   <body>
-<%= render 'nav' %>
     <div id="page-content">
-      <div class="container">
+      <div id="page-container" class="container">
+        <div id="header">
+          <%= image_tag 'logo.png' %>
+        </div>
+<%= render 'nav' %>
         <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= raw(message) %></div>
         <% end %>
 <%= yield %>
+<%= render 'footer' %>
       </div>
     </div>
-<%= render 'footer' %>
   </body>
 </html>
